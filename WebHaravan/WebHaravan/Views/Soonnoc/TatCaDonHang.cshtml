@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "TatCaDonHang";
+}
+@model WebHaravan.Models.Soonnoc.HaravanSoonnoc
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Danh sách đơn hàng</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>Mã</th>
+                            <th>Ngày tạo</th>
+                            <th>Khách hàng</th>
+                            <th>Thanh toán</th>
+                            <th>Giao hàng</th>
+                            <th>COD</th>
+                            <th>Tổng tiền</th>
+                            <th>Kênh</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            @foreach (var list in ViewBag.List)
+                            {
+                                <td>@list</td>
+                            }
+
+                        </tr>
+                       
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
