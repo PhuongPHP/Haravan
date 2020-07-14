@@ -132,10 +132,12 @@
     <Compile Include="Common\ContantSoonnoc.cs" />
     <Compile Include="Controllers\GomiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\SoonnocController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Account\AccountModel.cs" />
     <Compile Include="Models\Soonnoc\HaravanSoonnoc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -2006,11 +2008,13 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\_LayoutMain.cshtml" />
     <Content Include="Views\Soonnoc\TatCaDonHang.cshtml" />
     <Content Include="Views\Soonnoc\TaoDonHang.cshtml" />
     <Content Include="Views\Gomi\TatCaDonHang.cshtml" />
     <Content Include="Views\Gomi\TaoDonHang.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Views\Shared\_LayoutTaoDonHang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

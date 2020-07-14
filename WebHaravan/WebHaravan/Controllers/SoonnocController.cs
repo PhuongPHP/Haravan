@@ -19,18 +19,14 @@ namespace WebHaravan.Controllers
     public class SoonnocController : Controller
     {
         // GET: Soonnoc
+        [Authorize]
         public ActionResult TatCaDonHang()
         {
             Welcome haravan = List();
-            //List<string> List = new List<string>();
-            //List.Add("Test");
-            //List.Add("Test1");
-            //List.Add("Test2");
-            //List.Add("Test3");
-            //List.Add("Test4");
-            //ViewBag.List = List;
+        
             return View(haravan);
         }
+        [Authorize]
         public ActionResult TaoDonHang()
         {
             return View();
@@ -46,6 +42,7 @@ namespace WebHaravan.Controllers
 
                 System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
                 var webRequest = System.Net.WebRequest.Create(WEBSERVICE_URL);
+                Welcome modelresult = new Welcome();
                 if (webRequest != null)
                 {
                     webRequest.Method = "GET";
@@ -56,16 +53,12 @@ namespace WebHaravan.Controllers
                     {
                         string request = streamReader.ReadToEnd();
                         data = request;
-                        
-
-                        //TatCaDonHang(request);
-
-                        //return data;
                     }
 
-                    Welcome modelresult = JsonConvert.DeserializeObject<Welcome>(data);
+                    modelresult = JsonConvert.DeserializeObject<Welcome>(data);
+                    
                 }
-                return null;
+                return modelresult;
             }
             catch (Exception ex)
             {

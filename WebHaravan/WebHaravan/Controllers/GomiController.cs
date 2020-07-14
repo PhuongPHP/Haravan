@@ -9,10 +9,12 @@ namespace WebHaravan.Controllers
     public class GomiController : Controller
     {
         // GET: Gomi
+        [Authorize]
         public ActionResult TatCaDonHang()
         {
             return View();
         }
+        [Authorize]
         public ActionResult TaoDonHang()
         {
             return View();
