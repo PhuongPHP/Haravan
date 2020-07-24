@@ -1,0 +1,39 @@
+﻿.circle-status {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2.5px solid #22c993;
+    display: inline-block;
+}
+.mr-2 {
+    margin-right: .5rem !important;
+}
+.circle-status-text {
+    color: #22c993;
+    font-weight: 500;
+}
+
+.circle-status-pending {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2.5px solid #36a3f7;
+    display: inline-block;
+}
+
+.circle-status-text-pending {
+    color: #36a3f7;
+    font-weight: 500;
+}
+.circle-status-notfulfilled {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2.5px solid #fdbd41;
+    display: inline-block;
+}
+
+.circle-status-text-notfulfilled {
+    color: #fdbd41;
+    font-weight: 500;
+}

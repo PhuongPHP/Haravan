@@ -138,10 +138,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Account\AccountModel.cs" />
+    <Compile Include="Models\Gomi\RequestGomi.cs" />
     <Compile Include="Models\Soonnoc\HaravanSoonnoc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\style.css" />
     <Content Include="libs\dist\css\adminlte.css" />
     <Content Include="libs\dist\css\adminlte.min.css" />
     <Content Include="libs\dist\css\alt\adminlte.components.css" />
@@ -2015,12 +2017,11 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
     <Content Include="Views\Shared\_LayoutTaoDonHang.cshtml" />
+    <Content Include="Views\Shared\_PartialMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\css\" />
     <Folder Include="Content\images\" />
-    <Folder Include="Models\ViewModel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\plugins\bootstrap.min.css.map" />

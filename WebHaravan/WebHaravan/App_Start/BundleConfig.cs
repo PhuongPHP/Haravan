@@ -16,6 +16,8 @@ namespace WebHaravan
 
             bundles.Add(new ScriptBundle("~/Scripts/Jquery").Include(
                       "~/Scripts/jquery-3.5.1.min.js"));
+            bundles.Add(new StyleBundle("~/Style/bundles").Include(
+                      "~/Content/css/style.css"));
         }
     }
 }

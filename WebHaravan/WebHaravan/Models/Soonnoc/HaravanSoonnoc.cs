@@ -402,7 +402,7 @@
         public long PricePromotion { get; set; }
 
         [JsonProperty("product_id")]
-        public long ProductId { get; set; }
+        public long? ProductId { get; set; }
 
         [JsonProperty("quantity")]
         public long Quantity { get; set; }
@@ -417,7 +417,7 @@
         public string Title { get; set; }
 
         [JsonProperty("variant_id")]
-        public long VariantId { get; set; }
+        public long? VariantId { get; set; }
 
         [JsonProperty("variant_title")]
         public string VariantTitle { get; set; }

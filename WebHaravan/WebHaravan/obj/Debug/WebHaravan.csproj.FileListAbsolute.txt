@@ -77,4 +77,3 @@ C:\Haravan\WebHaravan\WebHaravan\obj\Debug\WebHaravan.csproj.CoreCompileInputs.c
 C:\Haravan\WebHaravan\WebHaravan\obj\Debug\WebHaravan.csproj.CopyComplete
 C:\Haravan\WebHaravan\WebHaravan\obj\Debug\WebHaravan.dll
 C:\Haravan\WebHaravan\WebHaravan\obj\Debug\WebHaravan.pdb
-C:\Haravan\WebHaravan\WebHaravan\obj\Debug\WebHaravan.csprojAssemblyReference.cache

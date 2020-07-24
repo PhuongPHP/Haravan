@@ -87,63 +87,9 @@
                     </div>
                 </div>
                 <!-- Sidebar Menu -->
-                <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <li class="nav-item has-treeview menu-open">
-                            <a href="#" class="nav-link active">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Tổng quan
-                                </p>
-                            </a>
-                        <li class="nav-item has-treeview menu-open">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-cart-plus"></i>
-                                <p>
-                                    Đơn hàng Soonnoc
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="@Url.Action("TatCaDonHang","Soonnoc")" class="nav-link" id="SoonnocAllOredr">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Tất cả đơn hàng</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("TaoDonHang","Soonnoc")" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Tạo đơn hàng</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-cart-plus"></i>
-                                <p>
-                                    Đơn hàng Gomi
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="@Url.Action("TatCaDonHang","Gomi")" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Tất cả đơn hàng</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("TaoDonHang","Gomi")" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Tạo đơn hàng</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
+                @{
+                    Html.RenderPartial("~/Views/Shared/_PartialMenu.cshtml");
+                }
                 <!-- /.sidebar-menu -->
             </div>
             <!-- /.sidebar -->
