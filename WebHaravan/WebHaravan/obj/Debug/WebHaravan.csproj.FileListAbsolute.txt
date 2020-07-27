@@ -77,3 +77,8 @@ C:\Haravan\WebHaravan\WebHaravan\obj\Debug\WebHaravan.csproj.CoreCompileInputs.c
 C:\Haravan\WebHaravan\WebHaravan\obj\Debug\WebHaravan.csproj.CopyComplete
 C:\Haravan\WebHaravan\WebHaravan\obj\Debug\WebHaravan.dll
 C:\Haravan\WebHaravan\WebHaravan\obj\Debug\WebHaravan.pdb
+C:\Haravan\WebHaravan\WebHaravan\obj\Debug\WebHaravan.csprojAssemblyReference.cache
+C:\Haravan\WebHaravan\WebHaravan\bin\PagedList.dll
+C:\Haravan\WebHaravan\WebHaravan\bin\PagedList.xml
+C:\Haravan\WebHaravan\WebHaravan\bin\PagedList.Mvc.dll
+C:\Haravan\WebHaravan\WebHaravan\bin\PagedList.Mvc.xml

@@ -22,9 +22,24 @@ namespace WebHaravan.Controllers
         [Authorize]
         public ActionResult TatCaDonHang()
         {
-            List<Welcome> haravan = List();
-      
-            return View(haravan.ToList());
+            Welcome count_page = Page();
+
+   
+            var count = count_page.Count;
+            Console.WriteLine(count);
+            int page_du = (int)count % 50;
+            int total_page = 0;
+            if (page_du == 0)
+            {
+                total_page = (int)count / 50;
+            }
+            if (page_du != 0)
+            {
+                total_page = (int)count / 50 + 1;
+            }
+            total_page = count_page.TotalPage;
+            Welcome haravan = List();
+            return View(total_page);
         }
         [Authorize]
         public ActionResult TaoDonHang()
@@ -32,31 +47,30 @@ namespace WebHaravan.Controllers
             return View();
         }
 
-        private List<Welcome> List()
+        private Welcome List()
         {
             try
             {
-                string count_page = Page();
-                JObject objectPage = JObject.Parse(count_page);
-                var count = objectPage["count"];
-                int page_du = (int)count % 50;
-                int page = 0;
-                if (page_du == 0)
-                {
-                    page = (int)count / 50;
-                }
-                if (page_du != 0)
-                {
-                    page = (int)count / 50 + 1;
-                }
+               
+                //JObject objectPage = JObject.Parse(count_page);
+                //var count = objectPage["count"];
+                //int page_du = (int)count % 50;
+                //int page = 0;
+                //if (page_du == 0)
+                //{
+                //    page = (int)count / 50;
+                //}
+                //if (page_du != 0)
+                //{
+                //    page = (int)count / 50 + 1;
+                //}
                 Welcome modelresult = new Welcome();
-                List<Welcome> TEST = new List<Welcome>();
-                for (int i = 0; i <= page; i++)
-                {
+                //for (int i = 0; i <= page; i++)
+                //{
                     string data = string.Empty;
-                    string WEBSERVICE_URL = "https://apis.haravan.com/com/orders.json?page=";
+                    string WEBSERVICE_URL = "https://apis.haravan.com/com/orders.json";
                     System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
-                    var webRequest = System.Net.WebRequest.Create(WEBSERVICE_URL + i);
+                    var webRequest = System.Net.WebRequest.Create(WEBSERVICE_URL);
 
                     if (webRequest != null)
                     {
@@ -70,10 +84,9 @@ namespace WebHaravan.Controllers
                             data = request;
                         }
                         modelresult = JsonConvert.DeserializeObject<Welcome>(data);
-                        TEST.Add(modelresult);
                     }
-                }
-                return TEST;
+                //}
+                return modelresult;
             }
             catch (Exception ex)
             {
@@ -81,7 +94,7 @@ namespace WebHaravan.Controllers
                 return null;
             }
         }
-        public static string Page()
+        public Welcome Page()
         {
             string data = string.Empty;
             string WEBSERVICE_URL = "https://apis.haravan.com/com/orders/count.json";
@@ -101,9 +114,11 @@ namespace WebHaravan.Controllers
                     {
                         string request = streamReader.ReadToEnd();
                         data = request;
+                        
                     }
+                    modelresult = JsonConvert.DeserializeObject<Welcome>(data);
                 }
-                return data;
+                return modelresult;
             }
             catch (Exception ex)
             {

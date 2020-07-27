@@ -8,16 +8,26 @@ namespace WebHaravan
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
-                        "~/Content/plugins/bootstrap.min.css"));
+            // CSS style (bootstrap)
+            bundles.Add(new StyleBundle("~/Content/bootstrapCss").Include(
+                       "~/Content/plugins/bootstrap.min.css"));
 
+            // jQuery boostrap
             bundles.Add(new ScriptBundle("~/Scripts/bootstrapJs").Include(
-                     "~/Scripts/libs/bootstrap/bootstrap.min.js"));
+                        "~/Scripts/bootstrap.min.js",
+                        "~/Scripts/jquery-3.5.1.min.js"));
 
-            bundles.Add(new ScriptBundle("~/Scripts/Jquery").Include(
-                      "~/Scripts/jquery-3.5.1.min.js"));
-            bundles.Add(new StyleBundle("~/Style/bundles").Include(
-                      "~/Content/css/style.css"));
+            bundles.Add(new StyleBundle("~/Content/Style").Include(
+                        "~/Content/css/style.css"));
+
+            // Plugins Layout css
+            bundles.Add(new StyleBundle("~/Content/pluginsLayout").Include(
+                       "~/libs/plugins/fontawesome-free/css/all.min.css",
+                       //"~/libs/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
+                       //"~/libs/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
+                       "~/libs/plugins/jqvmap/jqvmap.min.css",
+                       "~/libs/dist/css/adminlte.min.css",
+                       "~/Content/plugins/bootstrap.min.css"));
         }
     }
 }

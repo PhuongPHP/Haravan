@@ -48,6 +48,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -139,11 +145,13 @@
     </Compile>
     <Compile Include="Models\Account\AccountModel.cs" />
     <Compile Include="Models\Gomi\RequestGomi.cs" />
+    <Compile Include="Models\ModelPage.cs" />
     <Compile Include="Models\Soonnoc\HaravanSoonnoc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\style.css" />
+    <Content Include="Content\plugins\PagedList.css" />
     <Content Include="libs\dist\css\adminlte.css" />
     <Content Include="libs\dist\css\adminlte.min.css" />
     <Content Include="libs\dist\css\alt\adminlte.components.css" />
@@ -1818,10 +1826,6 @@
     <Content Include="libs\plugins\toastr\toastr.css" />
     <Content Include="libs\plugins\toastr\toastr.min.css" />
     <Content Include="libs\plugins\toastr\toastr.min.js" />
-    <Content Include="Content\plugins\bootstrap-grid.css" />
-    <Content Include="Content\plugins\bootstrap-grid.min.css" />
-    <Content Include="Content\plugins\bootstrap-reboot.css" />
-    <Content Include="Content\plugins\bootstrap-reboot.min.css" />
     <Content Include="Content\plugins\bootstrap.css" />
     <Content Include="Content\plugins\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -1913,11 +1917,10 @@
     <Content Include="libs\dist\css\alt\adminlte.plugins.min.css.map" />
     <Content Include="libs\dist\js\adminlte.js.map" />
     <Content Include="libs\dist\js\adminlte.min.js.map" />
-    <None Include="Scripts\jquery-3.5.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.5.1.js" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />
-    <Content Include="Scripts\jquery-3.5.1.slim.js" />
-    <Content Include="Scripts\jquery-3.5.1.slim.min.js" />
     <Content Include="Scripts\libs\bootstrap\bootstrap.bundle.js" />
     <Content Include="Scripts\libs\bootstrap\bootstrap.bundle.min.js" />
     <Content Include="Scripts\libs\bootstrap\bootstrap.js" />
@@ -1997,7 +2000,6 @@
     <Content Include="Scripts\libs\bootstrap\umd\popper-utils.min.js" />
     <Content Include="Scripts\libs\bootstrap\umd\popper.js" />
     <Content Include="Scripts\libs\bootstrap\umd\popper.min.js" />
-    <Content Include="Scripts\Soonnoc.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -2024,12 +2026,6 @@
     <Folder Include="Content\images\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\plugins\bootstrap.min.css.map" />
-    <Content Include="Content\plugins\bootstrap.css.map" />
-    <Content Include="Content\plugins\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\plugins\bootstrap-reboot.css.map" />
-    <Content Include="Content\plugins\bootstrap-grid.min.css.map" />
-    <Content Include="Content\plugins\bootstrap-grid.css.map" />
     <None Include="packages.config" />
     <Content Include="Scripts\libs\bootstrap\umd\popper.min.js.map" />
     <Content Include="Scripts\libs\bootstrap\umd\popper.js.map" />
@@ -2050,8 +2046,10 @@
     <Content Include="Scripts\libs\bootstrap\bootstrap.js.map" />
     <Content Include="Scripts\libs\bootstrap\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\libs\bootstrap\bootstrap.bundle.js.map" />
-    <Content Include="Scripts\jquery-3.5.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.5.1.min.map" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="libs\plugins\fullcalendar-bootstrap\main.d.ts" />

@@ -44,54 +44,62 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @*@foreach (var list in Model)
+                                    @foreach (var list in Model)
                                     {
-                                    <tr>
-                                        <td>@list.Order.OrderNumber</td>
-                                        <td>@list.CreatedAt</td>
-                                        <td>@list.BillingAddress.FirstName</td>
-                                        @if (list.FinancialStatus == "pending")
+                                        foreach (var order in list.Order)
                                         {
-                                            <td>
-                                                <div>
-                                                    <span class="circle-status-pending mr-2"></span>
-                                                    <span class="circle-status-text-pending">Chờ xử lý</span>
-                                                </div>
-                                            </td>
-                                        }
-                                        @if (list.FinancialStatus == "paid")
-                                        {
-                                            <td>
-                                                <div>
-                                                    <span class="circle-status mr-2"></span>
-                                                    <span class="circle-status-text">Đã thanh toán</span>
-                                                </div>
-                                            </td>
-                                        }
-                                        @if (list.FulfillmentStatus == "notfulfilled")
-                                        {
-                                            <td>
-                                                <div>
-                                                    <span class="circle-status-notfulfilled mr-2"></span>
-                                                    <span class="circle-status-text-notfulfilled">Chưa giao hàng</span>
-                                                </div>
-                                            </td>
-                                        }
-                                        @if (list.FulfillmentStatus == "fulfilled")
-                                        {
-                                            <td>
-                                                <div>
-                                                    <span class="circle-status-notfulfilled mr-2"></span>
-                                                    <span class="circle-status-text-notfulfilled">Chờ lấy hàng</span>
-                                                </div>
-                                            </td>
-                                        }
+                                            foreach(var listOrder in order.OrderNumber)
+                                            {
 
-                                        <td></td>
-                                        <td>@String.Format("{0:0,0 đ}", list.SubtotalPrice)</td>
-                                        <td>@list.SourceName</td>
-                                    </tr>
-                                    }*@
+                                            }
+
+                                            <tr>
+                                                <td>@order.OrderNumber</td>
+                                     
+                                                <td>@order.CreatedAt</td>
+                                                <td>@order.BillingAddress.FirstName</td>
+                                                @if (order.FinancialStatus == "pending")
+                                                {
+                                                    <td>
+                                                        <div>
+                                                            <span class="circle-status-pending mr-2"></span>
+                                                            <span class="circle-status-text-pending">Chờ xử lý</span>
+                                                        </div>
+                                                    </td>
+                                                }
+                                                @if (order.FinancialStatus == "paid")
+                                                {
+                                                    <td>
+                                                        <div>
+                                                            <span class="circle-status mr-2"></span>
+                                                            <span class="circle-status-text">Đã thanh toán</span>
+                                                        </div>
+                                                    </td>
+                                                }
+                                                @if (order.FulfillmentStatus == "notfulfilled")
+                                                {
+                                                    <td>
+                                                        <div>
+                                                            <span class="circle-status-notfulfilled mr-2"></span>
+                                                            <span class="circle-status-text-notfulfilled">Chưa giao hàng</span>
+                                                        </div>
+                                                    </td>
+                                                }
+                                                @if (order.FulfillmentStatus == "fulfilled")
+                                                {
+                                                    <td>
+                                                        <div>
+                                                            <span class="circle-status-notfulfilled mr-2"></span>
+                                                            <span class="circle-status-text-notfulfilled">Chờ lấy hàng</span>
+                                                        </div>
+                                                    </td>
+                                                }
+                                                <td></td>
+                                                <td>@String.Format("{0:0,0 đ}", order.SubtotalPrice)</td>
+                                                <td>@order.SourceName</td>
+                                            </tr>
+                                        }
+                                    }
 
                                 </tbody>
                             </table>
@@ -123,7 +131,7 @@
                                             <tr>
                                                 <td>@order.OrderNumber</td>
                                                 <td>@order.CreatedAt</td>
-                                                <td>@order.BillingAddress.LastName</td>
+                                                <td>@order.BillingAddress.FirstName</td>
                                                 <td>---</td>
                                                 <td>Cho giao hang</td>
                                                 <td>--</td>
@@ -158,25 +166,36 @@
                                         <th>Kênh</th>
                                     </tr>
                                 </thead>
-                                @*<tbody>
+                                <tbody>
                                     @foreach (var list in Model)
                                     {
-                                        if (list.Order.FinancialStatus == "pending")
+                                        foreach (var order in list.Order)
                                         {
-                                            <tr>
-                                                <td>@list.OrderNumber</td>
-                                                <td>@list.CreatedAt</td>
-                                                <td>@list.BillingAddress.LastName</td>
-                                                <td>@list.FinancialStatus</td>
-                                                <td>Cho giao hang</td>
-                                                <td>--</td>
-                                                <td>@String.Format("{0:0,0 đ}", list.SubtotalPrice)</td>
-                                                <td>@list.SourceName</td>
-                                            </tr>
+                                            if (order.FinancialStatus == "pending")
+                                            {
+                                                <tr>
+                                                    <td>@order.OrderNumber</td>
+                                                    <td>@order.CreatedAt</td>
+                                                    <td>@order.BillingAddress.FirstName</td>
+                                                    <td>@order.FinancialStatus</td>
+                                                    @if (order.FulfillmentStatus == "notfulfilled")
+                                                    {
+                                                        <td>
+                                                            <div>
+                                                                <span class="circle-status-notfulfilled mr-2"></span>
+                                                                <span class="circle-status-text-notfulfilled">Chưa giao hàng</span>
+                                                            </div>
+                                                        </td>
+                                                    }
+                                                    <td>--</td>
+                                                    <td>@String.Format("{0:0,0 đ}", order.SubtotalPrice)</td>
+                                                    <td>@order.SourceName</td>
+                                                </tr>
+                                            }
                                         }
                                     }
 
-                                </tbody>*@
+                                </tbody>
                             </table>
                         </div>
                         <!-- /.card-body -->
@@ -185,5 +204,12 @@
             </div>
         </div>
         <!-- /.card -->
+        <div class="card-footer clearfix" id="pagination">
+            <ul class="pagination pagination-sm m-0 float-right">
+                <li class="page-item"><a class="page-link" href="#">«</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">»</a></li>
+            </ul>
+        </div>
     </div>
 </div>

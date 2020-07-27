@@ -10,6 +10,8 @@
     {
         [JsonProperty("orders")]
         public List<Order> Order { get; set; }
+        public long Count { get; set; }
+        public int TotalPage { get; set; }
     }
 
     public partial class Order
@@ -550,5 +552,12 @@
 
         [JsonProperty("send_email")]
         public bool SendEmail { get; set; }
+    }
+
+    public partial class Page
+    {
+        
+        public long Count { get; set; }
+        public int TotalPage { get; set; }
     }
 }
