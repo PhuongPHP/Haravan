@@ -10,8 +10,8 @@
     {
         [JsonProperty("orders")]
         public List<Order> Order { get; set; }
-        public long PageCount { get; set; }
-        public int CurrentPageIndex { get; set; }
+        public long PageCount1 { get; set; }
+        public int TotalPage { get; set; }
     }
 
     public partial class Order

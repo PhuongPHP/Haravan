@@ -21,10 +21,10 @@ namespace WebHaravan.Controllers
     {
         // GET: Soonnoc
         [Authorize]
-        public ActionResult TatCaDonHang(int page)
+        public ActionResult TatCaDonHang(int? page)
         {
-            int pageSize = 50;
-            int pageNumber = page;
+            int pageSize = 20;
+            int pageNumber = page ?? 1;
             List<Welcome> haravan = List().ToList();
             var count_page = Page();
             JObject objectPage = JObject.Parse(count_page);
