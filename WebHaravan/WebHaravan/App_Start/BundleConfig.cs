@@ -15,9 +15,11 @@ namespace WebHaravan
             // jQuery boostrap
             bundles.Add(new ScriptBundle("~/Scripts/bootstrapJs").Include(
                         "~/Scripts/bootstrap.min.js",
+                        "~/Scripts/jquery.unobtrusive-ajax.min.js",
                         "~/Scripts/jquery-3.5.1.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/Style").Include(
+                        "~/Content/plugins/PagedList.css",
                         "~/Content/css/style.css"));
 
             // Plugins Layout css

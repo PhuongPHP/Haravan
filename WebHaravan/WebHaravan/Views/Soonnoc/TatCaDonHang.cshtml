@@ -2,9 +2,11 @@
 @{
     ViewBag.Title = "TatCaDonHang";
 }
-@model IEnumerable<WebHaravan.Models.Soonnoc.Welcome>
 
-@Styles.Render("~/Style/bundles");
+@model PagedList.IPagedList<WebHaravan.Models.Soonnoc.Order>
+@using PagedList.Mvc;
+
+@Styles.Render("~/Content/Style")
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -46,19 +48,12 @@
                                 <tbody>
                                     @foreach (var list in Model)
                                     {
-                                        foreach (var order in list.Order)
-                                        {
-                                            foreach(var listOrder in order.OrderNumber)
-                                            {
+                                         <tr>
+                                                <td>@list.OrderNumber</td>
 
-                                            }
-
-                                            <tr>
-                                                <td>@order.OrderNumber</td>
-                                     
-                                                <td>@order.CreatedAt</td>
-                                                <td>@order.BillingAddress.FirstName</td>
-                                                @if (order.FinancialStatus == "pending")
+                                                <td>@list.CreatedAt</td>
+                                                <td>@list.BillingAddress.FirstName</td>
+                                                @if (list.FinancialStatus == "pending")
                                                 {
                                                     <td>
                                                         <div>
@@ -67,7 +62,7 @@
                                                         </div>
                                                     </td>
                                                 }
-                                                @if (order.FinancialStatus == "paid")
+                                                @if (list.FinancialStatus == "paid")
                                                 {
                                                     <td>
                                                         <div>
@@ -76,7 +71,7 @@
                                                         </div>
                                                     </td>
                                                 }
-                                                @if (order.FulfillmentStatus == "notfulfilled")
+                                                @if (list.FulfillmentStatus == "notfulfilled")
                                                 {
                                                     <td>
                                                         <div>
@@ -85,7 +80,7 @@
                                                         </div>
                                                     </td>
                                                 }
-                                                @if (order.FulfillmentStatus == "fulfilled")
+                                                @if (list.FulfillmentStatus == "fulfilled")
                                                 {
                                                     <td>
                                                         <div>
@@ -95,10 +90,9 @@
                                                     </td>
                                                 }
                                                 <td></td>
-                                                <td>@String.Format("{0:0,0 đ}", order.SubtotalPrice)</td>
-                                                <td>@order.SourceName</td>
+                                                <td>@String.Format("{0:0,0 đ}", list.SubtotalPrice)</td>
+                                                <td>@list.SourceName</td>
                                             </tr>
-                                        }
                                     }
 
                                 </tbody>
@@ -106,110 +100,107 @@
                         </div>
                         <!-- /.card-body -->
                     </div>
-                    <div class="tab-pane fade" id="custom-content-above-profile" role="tabpanel" aria-labelledby="custom-content-above-profile-tab">
-                        <!-- /.card-header -->
-                        <div class="card-body table-responsive p-0">
-                            <table class="table table-hover text-nowrap">
-                                <thead>
-                                    <tr>
-                                        <th>Mã</th>
-                                        <th>Ngày tạo</th>
-                                        <th>Khách hàng</th>
-                                        <th>Thanh toán</th>
-                                        <th>Giao hàng</th>
-                                        <th>COD</th>
-                                        <th>Tổng tiền</th>
-                                        <th>Kênh</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                    @*<div class="tab-pane fade" id="custom-content-above-profile" role="tabpanel" aria-labelledby="custom-content-above-profile-tab">
+                            <!-- /.card-header -->
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover text-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>Mã</th>
+                                            <th>Ngày tạo</th>
+                                            <th>Khách hàng</th>
+                                            <th>Thanh toán</th>
+                                            <th>Giao hàng</th>
+                                            <th>COD</th>
+                                            <th>Tổng tiền</th>
+                                            <th>Kênh</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                                    @foreach (var list in Model)
-                                    {
-                                        foreach (var order in list.Order)
+                                        @foreach (var item in Model)
                                         {
-                                            <tr>
-                                                <td>@order.OrderNumber</td>
-                                                <td>@order.CreatedAt</td>
-                                                <td>@order.BillingAddress.FirstName</td>
-                                                <td>---</td>
-                                                <td>Cho giao hang</td>
-                                                <td>--</td>
-                                                <td>@String.Format("{0:0,0 đ}", order.SubtotalPrice)</td>
-                                                <td>@order.SourceName</td>
-                                            </tr>
-                                        }
-
-                                    }
-
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                    <div class="tab-pane fade" id="custom-content-above-messages" role="tabpanel" aria-labelledby="custom-content-above-messages-tab">
-                        No
-                    </div>
-                    <div class="tab-pane fade" id="custom-content-above-settings" role="tabpanel" aria-labelledby="custom-content-above-settings-tab">
-                        <!-- /.card-header -->
-                        <div class="card-body table-responsive p-0">
-                            <table class="table table-hover text-nowrap">
-                                <thead>
-                                    <tr>
-                                        <th>Mã</th>
-                                        <th>Ngày tạo</th>
-                                        <th>Khách hàng</th>
-                                        <th>Thanh toán</th>
-                                        <th>Giao hàng</th>
-                                        <th>COD</th>
-                                        <th>Tổng tiền</th>
-                                        <th>Kênh</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var list in Model)
-                                    {
-                                        foreach (var order in list.Order)
-                                        {
-                                            if (order.FinancialStatus == "pending")
+                                            foreach (var list in item.Order)
                                             {
                                                 <tr>
-                                                    <td>@order.OrderNumber</td>
-                                                    <td>@order.CreatedAt</td>
-                                                    <td>@order.BillingAddress.FirstName</td>
-                                                    <td>@order.FinancialStatus</td>
-                                                    @if (order.FulfillmentStatus == "notfulfilled")
-                                                    {
-                                                        <td>
-                                                            <div>
-                                                                <span class="circle-status-notfulfilled mr-2"></span>
-                                                                <span class="circle-status-text-notfulfilled">Chưa giao hàng</span>
-                                                            </div>
-                                                        </td>
-                                                    }
+                                                    <td>@list.OrderNumber</td>
+                                                    <td>@list.CreatedAt</td>
+                                                    <td>@list.BillingAddress.FirstName</td>
+                                                    <td>---</td>
+                                                    <td>Cho giao hang</td>
                                                     <td>--</td>
-                                                    <td>@String.Format("{0:0,0 đ}", order.SubtotalPrice)</td>
-                                                    <td>@order.SourceName</td>
+                                                    <td>@String.Format("{0:0,0 đ}", list.SubtotalPrice)</td>
+                                                    <td>@list.SourceName</td>
                                                 </tr>
                                             }
                                         }
-                                    }
 
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
                         </div>
-                        <!-- /.card-body -->
-                    </div>
+                        <div class="tab-pane fade" id="custom-content-above-messages" role="tabpanel" aria-labelledby="custom-content-above-messages-tab">
+                            No
+                        </div>
+                        <div class="tab-pane fade" id="custom-content-above-settings" role="tabpanel" aria-labelledby="custom-content-above-settings-tab">
+                            <!-- /.card-header -->
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover text-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>Mã</th>
+                                            <th>Ngày tạo</th>
+                                            <th>Khách hàng</th>
+                                            <th>Thanh toán</th>
+                                            <th>Giao hàng</th>
+                                            <th>COD</th>
+                                            <th>Tổng tiền</th>
+                                            <th>Kênh</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            foreach (var list in item.Order)
+                                            {
+                                                if (list.FinancialStatus == "pending")
+                                                {
+                                                    <tr>
+                                                        <td>@list.OrderNumber</td>
+                                                        <td>@list.CreatedAt</td>
+                                                        <td>@list.BillingAddress.FirstName</td>
+                                                        <td>@list.FinancialStatus</td>
+                                                        @if (list.FulfillmentStatus == "notfulfilled")
+                                                        {
+                                                            <td>
+                                                                <div>
+                                                                    <span class="circle-status-notfulfilled mr-2"></span>
+                                                                    <span class="circle-status-text-notfulfilled">Chưa giao hàng</span>
+                                                                </div>
+                                                            </td>
+                                                        }
+                                                        <td>--</td>
+                                                        <td>@String.Format("{0:0,0 đ}", list.SubtotalPrice)</td>
+                                                        <td>@list.SourceName</td>
+                                                    </tr>
+                                                }
+                                            }
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>*@
                 </div>
             </div>
         </div>
-        <!-- /.card -->
-        <div class="card-footer clearfix" id="pagination">
-            <ul class="pagination pagination-sm m-0 float-right">
-                <li class="page-item"><a class="page-link" href="#">«</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">»</a></li>
-            </ul>
-        </div>
+        <div id="page-content"></div>
+        <ul id="pagination-demo" class="pagination-md"></ul>
     </div>
 </div>
+
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("TatCaDonHang", "Soonnoc", new { page = page}))
+
