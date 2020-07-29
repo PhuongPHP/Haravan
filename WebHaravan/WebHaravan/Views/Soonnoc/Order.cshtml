@@ -228,27 +228,5 @@
         })
     });
 </script>
-<script>
-    var TotalPage = $("#TotalPage").val();
-    $('#pagination-demo').twbsPagination({
-        totalPages: TotalPage,
-        visiblePages: 7,
-        onPageClick: function (e, page) {
-            $('#page-content').text('Page ' + page);
-            console.log(`This page is: ${page}`);
-            $.ajax({
-                type: 'POST',
-                url: '@Url.Action("Order", "Soonnoc")',
-                data: {page: page},
-                dataType: "json",
-                success: function (data) {
-                    console.log(data);
-                },
-                error: function (e) {
-                    console.log(e);
-                }
-            });
-        }
-    });
-</script>
+
 

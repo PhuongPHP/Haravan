@@ -21,29 +21,25 @@ namespace WebHaravan.Controllers
     {
         // GET: Soonnoc
         [Authorize]
-        public ActionResult TatCaDonHang(int? page)
+        public ActionResult TatCaDonHang(int? id)
         {
-            if (page == 0)
-            {
-                page = 1;
-            }
-            string LoadData = List(1);
-            var modelresult = JsonConvert.DeserializeObject<Welcome>(LoadData);
+            string data = List(id ?? 1);
+            var modelresult = JsonConvert.DeserializeObject<Welcome>(data);
             var count_page = Page();
-
             JObject objectPage = JObject.Parse(count_page);
             var count = objectPage["count"];
             int page_du = (int)count % 50;
             if (page_du == 0)
             {
-                page = (int)count / 50;
+                id = (int)count / 50;
             }
             if (page_du != 0)
             {
-                page = (int)count / 50 + 1;
+                id = (int)count / 50 + 1;
             }
             modelresult.PageCount = (long)count;
-            modelresult.TotalPage = (int)page;
+            modelresult.TotalPage = (int)id;
+
             return View(modelresult);
         }
         [Authorize]
@@ -52,16 +48,11 @@ namespace WebHaravan.Controllers
             return View();
         }
         [HttpPost]
-        public JsonResult Order(int page)
+        public string Order(int page)
         {
-            if (page == 0)
-            {
-                page = 1;
-            }
-            string LoadData = List(1);
-            var modelresult = JsonConvert.DeserializeObject<Welcome>(LoadData);
+            string data = List(page);
+            var modelresult = JsonConvert.DeserializeObject<Welcome>(data);
             var count_page = Page();
-
             JObject objectPage = JObject.Parse(count_page);
             var count = objectPage["count"];
             int page_du = (int)count % 50;
@@ -77,15 +68,14 @@ namespace WebHaravan.Controllers
             modelresult.TotalPage = (int)page;
             return null;
         }
-        private string List(int page)
+        private string List(int value)
         {
             try
             {
                     string data = string.Empty;
                     string WEBSERVICE_URL = "https://apis.haravan.com/com/orders.json?page=";
                     System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
-                    var webRequest = System.Net.WebRequest.Create(WEBSERVICE_URL + page);
-
+                    var webRequest = System.Net.WebRequest.Create(WEBSERVICE_URL + value);
                     if (webRequest != null)
                     {
                         webRequest.Method = "GET";
@@ -97,8 +87,7 @@ namespace WebHaravan.Controllers
                             string request = streamReader.ReadToEnd();
                             data = request;
                         }
-                        
-                    }
+                }
                 return data;
             }
             catch (Exception ex)

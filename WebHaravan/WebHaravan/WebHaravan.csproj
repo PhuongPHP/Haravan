@@ -2054,6 +2054,8 @@
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Views\Soonnoc\_PartialOrderAll.cshtml" />
+    <Content Include="Views\Soonnoc\Order.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="libs\plugins\fullcalendar-bootstrap\main.d.ts" />
