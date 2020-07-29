@@ -3,8 +3,8 @@
     ViewBag.Title = "TatCaDonHang";
 }
 
-@model PagedList.IPagedList<WebHaravan.Models.Soonnoc.Order>
-@using PagedList.Mvc;
+@model WebHaravan.Models.Soonnoc.Welcome
+
 
 @Styles.Render("~/Content/Style")
 <div class="row">
@@ -46,7 +46,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var list in Model)
+                                    @foreach (var list in Model.Order)
                                     {
                                          <tr>
                                                 <td>@list.OrderNumber</td>
@@ -200,7 +200,33 @@
         <ul id="pagination-demo" class="pagination-md"></ul>
     </div>
 </div>
+<input type="text" id="TotalPage" value=@Model.TotalPage>
+<script>
+    var TotalPage = $("#TotalPage").val();
+    $('#pagination-demo').twbsPagination({
+        
+        totalPages: TotalPage,
+        visiblePages: 7,
+        onPageClick: function (e, pageJS) {
+            $('#page-content').text('Page ' + pageJS);
+            console.log(`This page is: ${pageJS}`);
 
-Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
-@Html.PagedListPager(Model, page => Url.Action("TatCaDonHang", "Soonnoc", new { page = page}))
+            $.ajax({
+                url: "/Soonnoc/Order",
+                data: {
+                   // page = pageJS
+                },
+                type: "POST",
+                success: function (result) {
+                    alert('ok');
+                },
+
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+
+        }
+    });
+</script>
 
