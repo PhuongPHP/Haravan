@@ -9,8 +9,6 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
-using PagedList;
-using PagedList.Mvc;
 using WebHaravan.Models.Soonnoc;
 using static WebHaravan.Common.ContantSoonnoc;
 
@@ -21,25 +19,28 @@ namespace WebHaravan.Controllers
     {
         // GET: Soonnoc
         [Authorize]
-        public ActionResult TatCaDonHang(int? id)
+        public ActionResult TatCaDonHang(int page = 9)
         {
-            string data = List(id ?? 1);
+            string data = List(page);
             var modelresult = JsonConvert.DeserializeObject<Welcome>(data);
-            var count_page = Page();
-            JObject objectPage = JObject.Parse(count_page);
-            var count = objectPage["count"];
-            int page_du = (int)count % 50;
-            if (page_du == 0)
+            if (page == 1)
             {
-                id = (int)count / 50;
+                Welcome modelPage = new Welcome();
+                string pageApi = Page();
+                JObject objectPage = JObject.Parse(pageApi);
+                var count = objectPage["count"];
+                int page_du = (int)count % 50;
+                if (page_du == 0)
+                {
+                    page = (int)count / 50;
+                }
+                if (page_du != 0)
+                {
+                    page = (int)count / 50 + 1;
+                }
+                modelresult.PageCount = (long)count;
+                modelresult.TotalPage = (int)page;
             }
-            if (page_du != 0)
-            {
-                id = (int)count / 50 + 1;
-            }
-            modelresult.PageCount = (long)count;
-            modelresult.TotalPage = (int)id;
-
             return View(modelresult);
         }
         [Authorize]
@@ -48,25 +49,33 @@ namespace WebHaravan.Controllers
             return View();
         }
         [HttpPost]
-        public string Order(int page)
+        public ActionResult Order(int page)
         {
             string data = List(page);
             var modelresult = JsonConvert.DeserializeObject<Welcome>(data);
-            var count_page = Page();
-            JObject objectPage = JObject.Parse(count_page);
-            var count = objectPage["count"];
-            int page_du = (int)count % 50;
-            if (page_du == 0)
+            if(page == 1)
             {
-                page = (int)count / 50;
+                Welcome modelPage = new Welcome();
+                string pageApi = Page();
+                JObject objectPage = JObject.Parse(pageApi);
+                var count = objectPage["count"];
+                int page_du = (int)count % 50;
+                if (page_du == 0)
+                {
+                    page = (int)count / 50;
+                }
+                if (page_du != 0)
+                {
+                    page = (int)count / 50 + 1;
+                }
+                modelresult.PageCount = (long)count;
+                modelresult.TotalPage = (int)page;
             }
-            if (page_du != 0)
+            if(page != 1)
             {
-                page = (int)count / 50 + 1;
+                List(page);
             }
-            modelresult.PageCount = (long)count;
-            modelresult.TotalPage = (int)page;
-            return null;
+            return PartialView("~/Views/Soonnoc/_PartialOrderAll.cshtml", modelresult);
         }
         private string List(int value)
         {

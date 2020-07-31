@@ -3,8 +3,6 @@
 }
 
 @model WebHaravan.Models.Soonnoc.Welcome
-
-
 @Styles.Render("~/Content/Style")
 <div class="row">
     <div class="col-12">
@@ -238,10 +236,11 @@
             console.log(`This page is: ${page}`);
             $.ajax({
                 type: 'POST',
-                url: '@Url.Action("Order", "Soonnoc")',
+                url: '@Url.Action("TatCaDonHang", "Soonnoc")',
                 data: {page: page},
                 dataType: "json",
                 success: function (data) {
+                    location.reload();  
                     console.log(data);
                 },
                 error: function (e) {
@@ -251,4 +250,7 @@
         }
     });
 </script>
+
+
+
 
