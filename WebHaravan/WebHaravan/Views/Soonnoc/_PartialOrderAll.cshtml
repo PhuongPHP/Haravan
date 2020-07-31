@@ -1,10 +1,4 @@
-﻿@{
-    ViewBag.Title = "TatCaDonHang";
-}
-
-@model WebHaravan.Models.Soonnoc.Welcome
-@Styles.Render("~/Content/Style")
-<div class="row">
+﻿<div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
@@ -91,7 +85,6 @@
                                             <td>@list.SourceName</td>
                                         </tr>
                                     }
-
                                 </tbody>
                             </table>
                         </div>
@@ -193,62 +186,9 @@
                 </div>
             </div>
         </div>
-        <div id="page-content"></div>
-        <ul id="pagination-demo" class="pagination-md"></ul>
     </div>
 </div>
-<input type="text" id="TotalPage" value=@Model.TotalPage style="display:none;">
 
-<script>
-        $(document).ready(function () {
-            $(document).on("click", "#pagination-demo li a", function (e) {
-            e.preventDefault();
-            var a = $(this).html();
-            @*$.ajax({
-                type: 'POST',
-                contentType: 'application/json',
-                cache: false,
-                url: '@Url.Action("Index", "vProducts")',
-                data: JSON.stringify({ 'page': $(this).html() }),
-                beforeSend: function (xhr) {
-
-                },
-                success: function (result) {
-                    $('#search-result').empty();
-                    $('#search-result').html(result);
-                    renderMySubordinateJobTable();
-                },
-                error: function (xhr) {
-                },
-                complete: function (xhr) {
-                }
-            });*@
-        })
-    });
-</script>
-<script>
-    var TotalPage = $("#TotalPage").val();
-    $('#pagination-demo').twbsPagination({
-        totalPages: TotalPage,
-        visiblePages: 7,
-        onPageClick: function (e, page) {
-            $('#page-content').text('Page ' + page);
-            console.log(`This page is: ${page}`);
-            $.ajax({
-                type: 'POST',
-                url: '@Url.Action("TatCaDonHang", "Soonnoc")',
-                data: {page: page},
-                dataType: "json",
-                success: function (data) {
-                    console.log(data);
-                },
-                error: function (e) {
-                    console.log(e);
-                }
-            });
-        }
-    });
-</script>
 
 
 
