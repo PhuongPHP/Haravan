@@ -4,34 +4,57 @@
 }
 
 @model WebHaravan.Models.Soonnoc.Welcome
-@*@using PagedList.Mvc;*@
 
 @Styles.Render("~/Content/Style")
-@if (Model.PageNumber == 1)
-{
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Danh sách đơn hàng</h3>
-                </div>
-                <div class="card-body">
-                    <ul class="nav nav-tabs" id="custom-content-above-tab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="custom-content-above-home-tab" data-toggle="pill" href="#custom-content-above-home" role="tab" aria-controls="custom-content-above-home" aria-selected="true">Tất cả đơn hàng</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="custom-content-above-profile-tab" data-toggle="pill" href="#custom-content-above-profile" role="tab" aria-controls="custom-content-above-profile" aria-selected="false">Đơn hàng mới</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="custom-content-above-messages-tab" data-toggle="pill" href="#custom-content-above-messages" role="tab" aria-controls="custom-content-above-messages" aria-selected="false">Chưa giao hàng</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="custom-content-above-settings-tab" data-toggle="pill" href="#custom-content-above-settings" role="tab" aria-controls="custom-content-above-settings" aria-selected="false">Chưa thanh toán</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content" id="custom-content-above-tabContent">
-                        <div class="tab-pane fade show active" id="custom-content-above-home" role="tabpanel" aria-labelledby="custom-content-above-home-tab">
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Danh sách đơn hàng</h3>
+            </div>
+            <div class="card-body">
+                <ul class="nav nav-tabs" id="custom-content-above-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="custom-content-above-home-tab" data-toggle="pill" href="#custom-content-above-home" role="tab" aria-controls="custom-content-above-home" aria-selected="true">Tất cả đơn hàng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="custom-content-above-profile-tab" data-toggle="pill" href="#custom-content-above-profile" role="tab" aria-controls="custom-content-above-profile" aria-selected="false">Đơn hàng mới</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="custom-content-above-messages-tab" data-toggle="pill" href="#custom-content-above-messages" role="tab" aria-controls="custom-content-above-messages" aria-selected="false">Chưa giao hàng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="custom-content-above-settings-tab" data-toggle="pill" href="#custom-content-above-settings" role="tab" aria-controls="custom-content-above-settings" aria-selected="false">Chưa thanh toán</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="custom-content-above-tabContent">
+                    <div class="tab-pane fade show active" id="custom-content-above-home" role="tabpanel" aria-labelledby="custom-content-above-home-tab">
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>Mã</th>
+                                        <th>Ngày tạo</th>
+                                        <th>Khách hàng</th>
+                                        <th>Thanh toán</th>
+                                        <th>Giao hàng</th>
+                                        <th>COD</th>
+                                        <th>Tổng tiền</th>
+                                        <th>Kênh</th>
+                                    </tr>
+                                </thead>
+                                    <tbody id="tbodyTable">
+                                        @{
+                                            Html.RenderPartial("_PartialOrderAll");
+                                        }
+                                    </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    @*<div class="tab-pane fade" id="custom-content-above-profile" role="tabpanel" aria-labelledby="custom-content-above-profile-tab">
                             <!-- /.card-header -->
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-hover text-nowrap">
@@ -47,205 +70,120 @@
                                             <th>Kênh</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="tbody">
-                                        @*@foreach (var list in Model.Order)
-                                        {
-                                            <tr>
-                                                <td>@list.OrderNumber</td>
+                                    <tbody>
 
-                                                <td>@list.CreatedAt</td>
-                                                <td>@list.BillingAddress.FirstName</td>
-                                                @if (list.FinancialStatus == "pending")
-                                                {
-                                                    <td>
-                                                        <div>
-                                                            <span class="circle-status-pending mr-2"></span>
-                                                            <span class="circle-status-text-pending">Chờ xử lý</span>
-                                                        </div>
-                                                    </td>
-                                                }
-                                                @if (list.FinancialStatus == "paid")
-                                                {
-                                                    <td>
-                                                        <div>
-                                                            <span class="circle-status mr-2"></span>
-                                                            <span class="circle-status-text">Đã thanh toán</span>
-                                                        </div>
-                                                    </td>
-                                                }
-                                                @if (list.FulfillmentStatus == "notfulfilled")
-                                                {
-                                                    <td>
-                                                        <div>
-                                                            <span class="circle-status-notfulfilled mr-2"></span>
-                                                            <span class="circle-status-text-notfulfilled">Chưa giao hàng</span>
-                                                        </div>
-                                                    </td>
-                                                }
-                                                @if (list.FulfillmentStatus == "fulfilled")
-                                                {
-                                                    <td>
-                                                        <div>
-                                                            <span class="circle-status-notfulfilled mr-2"></span>
-                                                            <span class="circle-status-text-notfulfilled">Chờ lấy hàng</span>
-                                                        </div>
-                                                    </td>
-                                                }
-                                                <td></td>
-                                                <td>@String.Format("{0:0,0 đ}", list.SubtotalPrice)</td>
-                                                <td>@list.SourceName</td>
-                                            </tr>
-                                        }*@
+                                        @foreach (var item in Model)
+                                        {
+                                            foreach (var list in item.Order)
+                                            {
+                                                <tr>
+                                                    <td>@list.OrderNumber</td>
+                                                    <td>@list.CreatedAt</td>
+                                                    <td>@list.BillingAddress.FirstName</td>
+                                                    <td>---</td>
+                                                    <td>Cho giao hang</td>
+                                                    <td>--</td>
+                                                    <td>@String.Format("{0:0,0 đ}", list.SubtotalPrice)</td>
+                                                    <td>@list.SourceName</td>
+                                                </tr>
+                                            }
+                                        }
+
                                     </tbody>
                                 </table>
                             </div>
                             <!-- /.card-body -->
                         </div>
-                        @*<div class="tab-pane fade" id="custom-content-above-profile" role="tabpanel" aria-labelledby="custom-content-above-profile-tab">
-                                <!-- /.card-header -->
-                                <div class="card-body table-responsive p-0">
-                                    <table class="table table-hover text-nowrap">
-                                        <thead>
-                                            <tr>
-                                                <th>Mã</th>
-                                                <th>Ngày tạo</th>
-                                                <th>Khách hàng</th>
-                                                <th>Thanh toán</th>
-                                                <th>Giao hàng</th>
-                                                <th>COD</th>
-                                                <th>Tổng tiền</th>
-                                                <th>Kênh</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            @foreach (var item in Model)
+                        <div class="tab-pane fade" id="custom-content-above-messages" role="tabpanel" aria-labelledby="custom-content-above-messages-tab">
+                            No
+                        </div>
+                        <div class="tab-pane fade" id="custom-content-above-settings" role="tabpanel" aria-labelledby="custom-content-above-settings-tab">
+                            <!-- /.card-header -->
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover text-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>Mã</th>
+                                            <th>Ngày tạo</th>
+                                            <th>Khách hàng</th>
+                                            <th>Thanh toán</th>
+                                            <th>Giao hàng</th>
+                                            <th>COD</th>
+                                            <th>Tổng tiền</th>
+                                            <th>Kênh</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            foreach (var list in item.Order)
                                             {
-                                                foreach (var list in item.Order)
+                                                if (list.FinancialStatus == "pending")
                                                 {
                                                     <tr>
                                                         <td>@list.OrderNumber</td>
                                                         <td>@list.CreatedAt</td>
                                                         <td>@list.BillingAddress.FirstName</td>
-                                                        <td>---</td>
-                                                        <td>Cho giao hang</td>
+                                                        <td>@list.FinancialStatus</td>
+                                                        @if (list.FulfillmentStatus == "notfulfilled")
+                                                        {
+                                                            <td>
+                                                                <div>
+                                                                    <span class="circle-status-notfulfilled mr-2"></span>
+                                                                    <span class="circle-status-text-notfulfilled">Chưa giao hàng</span>
+                                                                </div>
+                                                            </td>
+                                                        }
                                                         <td>--</td>
                                                         <td>@String.Format("{0:0,0 đ}", list.SubtotalPrice)</td>
                                                         <td>@list.SourceName</td>
                                                     </tr>
                                                 }
                                             }
+                                        }
 
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- /.card-body -->
+                                    </tbody>
+                                </table>
                             </div>
-                            <div class="tab-pane fade" id="custom-content-above-messages" role="tabpanel" aria-labelledby="custom-content-above-messages-tab">
-                                No
-                            </div>
-                            <div class="tab-pane fade" id="custom-content-above-settings" role="tabpanel" aria-labelledby="custom-content-above-settings-tab">
-                                <!-- /.card-header -->
-                                <div class="card-body table-responsive p-0">
-                                    <table class="table table-hover text-nowrap">
-                                        <thead>
-                                            <tr>
-                                                <th>Mã</th>
-                                                <th>Ngày tạo</th>
-                                                <th>Khách hàng</th>
-                                                <th>Thanh toán</th>
-                                                <th>Giao hàng</th>
-                                                <th>COD</th>
-                                                <th>Tổng tiền</th>
-                                                <th>Kênh</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach (var item in Model)
-                                            {
-                                                foreach (var list in item.Order)
-                                                {
-                                                    if (list.FinancialStatus == "pending")
-                                                    {
-                                                        <tr>
-                                                            <td>@list.OrderNumber</td>
-                                                            <td>@list.CreatedAt</td>
-                                                            <td>@list.BillingAddress.FirstName</td>
-                                                            <td>@list.FinancialStatus</td>
-                                                            @if (list.FulfillmentStatus == "notfulfilled")
-                                                            {
-                                                                <td>
-                                                                    <div>
-                                                                        <span class="circle-status-notfulfilled mr-2"></span>
-                                                                        <span class="circle-status-text-notfulfilled">Chưa giao hàng</span>
-                                                                    </div>
-                                                                </td>
-                                                            }
-                                                            <td>--</td>
-                                                            <td>@String.Format("{0:0,0 đ}", list.SubtotalPrice)</td>
-                                                            <td>@list.SourceName</td>
-                                                        </tr>
-                                                    }
-                                                }
-                                            }
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- /.card-body -->
-                            </div>*@
-                    </div>
+                            <!-- /.card-body -->
+                        </div>*@
                 </div>
             </div>
-            <div id="page-content"></div>
-            <ul id="pagination-demo" class="pagination-md"></ul>
         </div>
     </div>
-}
-else
-{
-    <div id="result-data">
-        @Html.Partial("~/Views/Soonnoc/_PartialOrderAll.cshtml");
-    </div>       
-}
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                @for (int i = 1; i <= Model.TotalPage; i++)
-                {
-                    <li class="page-item"><a class="page-link" href="">@i</a></li>
-                }
-            </ul>
-        </nav>
-        <input type="text" id="TotalPage" value=@Model.TotalPage style="display:none;">
+</div>
 
+
+
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination" id="pagination">
+        @for (int i = 1; i <= Model.TotalPage; i++)
+        {
+            <li class="page-item"><a class="page-link" href="">@i</a></li>
+        }
+    </ul>
+</nav>
 <script>
     $('.pagination li a').on('click', function (e) {
-        e.preventDefault();
-        var a = $(this).html();
-        //console.log(a);
-            $.ajax({
-                type: 'POST',
-                contentType: 'application/json',
-                cache: false,
-                url: '@Url.Action("TatCaDonHang", "Soonnoc")',
-                data: JSON.stringify({ 'page': $(this).html() }),
-
-                beforeSend: function (xhr) {
-
-                },
-                success: function (result) {
-                    console.log(result);
-                    $('#result-data').empty();
-                    $('#result-data').html(result);
-                    //location.reload(result);
-                    //renderMySubordinateJobTable();
-                },
-                error: function (xhr) {
-                },
-                complete: function (xhr) {
-                }
-            });
+    e.preventDefault();
+    var a = $(this).html();
+    //console.log(a);
+    $.ajax({
+        type: 'POST',
+        contentType: 'application/json',
+        cache: false,
+        url: '@Url.Action("Order", "Soonnoc")',
+        data: JSON.stringify({ 'page': $(this).html() }),
+        success: function (data) {
+            console.log(data);
+            $("#tbodyTable").html(data);
+        },
+        error: function (xhr) {
+        },
+        complete: function (xhr) {
+        }
     });
+});
 </script>
-
 

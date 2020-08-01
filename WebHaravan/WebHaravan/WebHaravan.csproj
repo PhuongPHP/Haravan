@@ -2011,19 +2011,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Soonnoc\TatCaDonHang.cshtml" />
-    <Content Include="Views\Soonnoc\TaoDonHang.cshtml" />
-    <Content Include="Views\Gomi\TatCaDonHang.cshtml" />
-    <Content Include="Views\Gomi\TaoDonHang.cshtml" />
-    <Content Include="Views\Login\Login.cshtml" />
-    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
-    <Content Include="Views\Shared\_LayoutTaoDonHang.cshtml" />
-    <Content Include="Views\Shared\_PartialMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2054,8 +2041,22 @@
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
-    <Content Include="Views\Soonnoc\_PartialOrderAll.cshtml" />
+    <Content Include="Views\Gomi\TaoDonHang.cshtml" />
+    <Content Include="Views\Gomi\TatCaDonHang.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\TestMethod.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Views\Shared\_LayoutTaoDonHang.cshtml" />
+    <Content Include="Views\Shared\_PartialMenu.cshtml" />
     <Content Include="Views\Soonnoc\Order.cshtml" />
+    <Content Include="Views\Soonnoc\TaoDonHang.cshtml" />
+    <Content Include="Views\Soonnoc\TatCaDonHang.cshtml" />
+    <Content Include="Views\Soonnoc\_PartialOrderAll.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="libs\plugins\fullcalendar-bootstrap\main.d.ts" />

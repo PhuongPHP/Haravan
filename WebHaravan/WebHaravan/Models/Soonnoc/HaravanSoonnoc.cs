@@ -12,7 +12,7 @@
         public List<Order> Order { get; set; }
         public long PageCount { get; set; }
         public int TotalPage { get; set; }
-        public int PageNumber { get; set; }
+        public int? PageNumber { get; set; }
     }
 
     public partial class Order

@@ -21,68 +21,22 @@ namespace WebHaravan.Controllers
     {
         // GET: Soonnoc
         [Authorize]
-        public ActionResult TatCaDonHang(/*int pageNumber = 1*/ int? page)
+        public ActionResult TatCaDonHang(int? page)
         {
-            //string data = List(pageNumber);
-            //var modelresult = JsonConvert.DeserializeObject<Welcome>(data);
-            //if (pageNumber == 1)
-            //{
-            //    Welcome modelPage = new Welcome();
-            //    string pageApi = Page();
-            //    JObject objectPage = JObject.Parse(pageApi);
-            //    var count = objectPage["count"];
-            //    int page_du = (int)count % 50;
-            //    int totalPage = 0;
-            //    if (page_du == 0)
-            //    {
-            //        totalPage = (int)count / 50;
-            //    }
-            //    if (page_du != 0)
-            //    {
-            //        totalPage = (int)count / 50 + 1;
-            //    }
-            //    modelresult.PageCount = (long)count;
-            //    modelresult.TotalPage = totalPage;
-            //    modelresult.PageNumber = pageNumber;
-            //}
-            //if(pageNumber != 1)
-            //{
-            //    Welcome modelPage = new Welcome();
-            //    string pageApi = Page();
-            //    JObject objectPage = JObject.Parse(pageApi);
-            //    var count = objectPage["count"];
-            //    int page_du = (int)count % 50;
-            //    int totalPage = 0;
-            //    if (page_du == 0)
-            //    {
-            //        totalPage = (int)count / 50;
-            //    }
-            //    if (page_du != 0)
-            //    {
-            //        totalPage = (int)count / 50 + 1;
-            //    }
-            //    modelresult.PageCount = (long)count;
-            //    modelresult.TotalPage = totalPage;
-            //    modelresult.PageNumber = pageNumber;
-
-            //    return PartialView("~/Views/Soonnoc/_PartialOrderAll.cshtml", modelresult);
-            //}
-            //return View(modelresult);
-            int pageSize = 50;
-            int pageNumber = page ?? 1;
+            int? pageNumber = page != null ? page : 1;
             Welcome haravan = List(pageNumber);
             var count_page = Page();
             JObject objectPage = JObject.Parse(count_page);
             var count = objectPage["count"];
             int totalPage = 0;
-            int page_du = (int)count % 50;
+            int page_du = (int)count % 20;
             if (page_du == 0)
             {
-                totalPage = (int)count / 50;
+                totalPage = (int)count / 20;
             }
             if (page_du != 0)
             {
-                totalPage = (int)count / 50 + 1;
+                totalPage = (int)count / 20 + 1;
             }
             haravan.PageCount = (long)count;
             haravan.TotalPage = totalPage;
@@ -94,59 +48,26 @@ namespace WebHaravan.Controllers
         {
             return View();
         }
-        //[HttpPost]
-        //public ActionResult Order(int page)
-        //{
-        //    string data = List(page);
-        //    var modelresult = JsonConvert.DeserializeObject<Welcome>(data);
-        //    if (page != 1)
-        //    {
-        //        Welcome modelPage = new Welcome();
-        //        string pageApi = Page();
-        //        JObject objectPage = JObject.Parse(pageApi);
-        //        var count = objectPage["count"];
-        //        int page_du = (int)count % 50;
-        //        if (page_du == 0)
-        //        {
-        //            page = (int)count / 50;
-        //        }
-        //        if (page_du != 0)
-        //        {
-        //            page = (int)count / 50 + 1;
-        //        }
-        //        modelresult.PageCount = (long)count;
-        //        modelresult.TotalPage = (int)page;
-        //    }
-        //    return PartialView("~/Views/Soonnoc/_PartialOrderAll.cshtml", modelresult);
-        //}
-        //private string List(int value)
-        //{
-        //    try
-        //    {
-        //            string data = string.Empty;
-        //            string WEBSERVICE_URL = "https://apis.haravan.com/com/orders.json?page=";
-        //            System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
-        //            var webRequest = System.Net.WebRequest.Create(WEBSERVICE_URL + value);
-        //            if (webRequest != null)
-        //            {
-        //                webRequest.Method = "GET";
-        //                webRequest.Timeout = 20000;
-        //                webRequest.Headers.Add(Header.AppId, Header.AppIdValue);
-        //                var httpResponse = (HttpWebResponse)webRequest.GetResponse();
-        //                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-        //                {
-        //                    string request = streamReader.ReadToEnd();
-        //                    data = request;
-        //                }
-        //        }
-        //        return data;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine(ex.ToString());
-        //        return null;
-        //    }
-        //}
+        [HttpPost]
+        public ActionResult Order(int page)
+        {
+            int pageNumber = page;
+            Welcome haravan = List(pageNumber);
+            var count_page = Page();
+            JObject objectPage = JObject.Parse(count_page);
+            var count = objectPage["count"];
+            int totalPage = 0;
+            int page_du = (int)count % 20;
+            if (page_du == 0)
+            {
+                totalPage = (int)count / 20;
+            }
+            if (page_du != 0)
+            {
+                totalPage = (int)count / 20 + 1;
+            }
+            return PartialView("~/Views/Soonnoc/_PartialOrderAll.cshtml",haravan);
+        }
         public string Page()
         {
             string data = string.Empty;
@@ -182,15 +103,16 @@ namespace WebHaravan.Controllers
 
 
 
-        private Welcome List(int varlue)
+        private Welcome List(int? value)
         {
             try
             {
                 Welcome modelresult = new Welcome();
                     string data = string.Empty;
                     string WEBSERVICE_URL = "https://apis.haravan.com/com/orders.json?page=";
+                    //string WEBSERVICE_URL = "https://apis.haravan.com/com/orders.json?page=1&limit=20";
                     System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
-                    var webRequest = System.Net.WebRequest.Create(WEBSERVICE_URL + varlue);
+                    var webRequest = System.Net.WebRequest.Create(WEBSERVICE_URL + value + "&limit=20");
 
                     if (webRequest != null)
                     {
