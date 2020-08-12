@@ -10,6 +10,7 @@
     {
         [JsonProperty("orders")]
         public List<Order> Order { get; set; }
+        public Pager Pager { get; set; }
         public long PageCount { get; set; }
         public int TotalPage { get; set; }
         public int? PageNumber { get; set; }
@@ -560,5 +561,51 @@
         
         public long Count { get; set; }
         public int TotalPage { get; set; }
+    }
+
+    public class Pager
+    {
+        public int TotalItems { get; set; }
+        public int CurrentPage { get; set; }
+        public int PageSize { get; set; }
+        public int TotalPages { get; set; }
+        public int StartPage { get; set; }
+        public int EndPage { get; set; }
+
+        public Pager(int totalItems, int? page, int pageSize = 20)
+        {
+            try
+            {
+                // calculate total, start and end pages
+                var totalPages = (int)Math.Ceiling((decimal)totalItems / (decimal)pageSize);
+                var currentPage = page != null ? (int)page : 1;
+                var startPage = currentPage - 5;
+                var endPage = currentPage + 4;
+                if (startPage <= 0)
+                {
+                    endPage -= (startPage - 1);
+                    startPage = 1;
+                }
+                if (endPage > totalPages)
+                {
+                    endPage = totalPages;
+                    if (endPage > 20)
+                    {
+                        startPage = endPage - 9;
+                    }
+                }
+
+                TotalItems = totalItems;
+                CurrentPage = currentPage;
+                PageSize = pageSize;
+                TotalPages = totalPages;
+                StartPage = startPage;
+                EndPage = endPage;
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
     }
 }

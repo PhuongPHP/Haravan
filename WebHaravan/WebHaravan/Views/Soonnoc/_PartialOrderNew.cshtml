@@ -1,0 +1,29 @@
+﻿@model WebHaravan.Models.Soonnoc.Welcome
+
+@foreach (var list in Model.Order)
+{
+    if (list.FinancialStatus == "pending")
+    {
+        <tr>
+            <td>@list.OrderNumber</td>
+
+            <td>@list.CreatedAt</td>
+            <td>@list.BillingAddress.FirstName</td>
+            <td>
+                <div>
+                    <span class="circle-status-pending mr-2"></span>
+                    <span class="circle-status-text-pending">Chờ xử lý</span>
+                </div>
+            </td>
+             <td>
+                <div>
+                    <span class="circle-status-notfulfilled mr-2"></span>
+                    <span class="circle-status-text-notfulfilled">Chưa giao hàng</span>
+                </div>
+            </td>
+            <td></td>
+            <td>@String.Format("{0:0,0 đ}", list.SubtotalPrice)</td>
+            <td>@list.SourceName</td>
+        </tr>
+    }
+}

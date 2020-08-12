@@ -2003,7 +2003,6 @@
     <Content Include="Scripts\libs\bootstrap\umd\popper-utils.min.js" />
     <Content Include="Scripts\libs\bootstrap\umd\popper.js" />
     <Content Include="Scripts\libs\bootstrap\umd\popper.min.js" />
-    <Content Include="Scripts\SoonnocLoad.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -2044,7 +2043,6 @@
     <Content Include="Views\Gomi\TaoDonHang.cshtml" />
     <Content Include="Views\Gomi\TatCaDonHang.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\TestMethod.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -2057,6 +2055,9 @@
     <Content Include="Views\Soonnoc\_PartialOrderAll.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Soonnoc\_PartialOrderNew.cshtml" />
+    <Content Include="Views\Soonnoc\_PartialOrderUnpaid.cshtml" />
+    <Content Include="Views\Soonnoc\_PartialNotfulfilled.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="libs\plugins\fullcalendar-bootstrap\main.d.ts" />

@@ -5,8 +5,8 @@
 
 @model WebHaravan.Models.Soonnoc.Welcome
 
-@Styles.Render("~/Content/Style")
-
+@*@Styles.Render("~/Content/Style")*@
+@Styles.Render(System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/Content/Style", true))
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -45,145 +45,155 @@
                                         <th>Kênh</th>
                                     </tr>
                                 </thead>
-                                    <tbody id="tbodyTable">
-                                        @{
-                                            Html.RenderPartial("_PartialOrderAll");
-                                        }
-                                    </tbody>
+                                <tbody id="tbodyTable">
+                                    @{
+                                        Html.RenderPartial("_PartialOrderAll");
+                                    }
+                                </tbody>
                             </table>
+                            <div class="row" style="float:right;">
+                                <span style="margin: auto;margin-right: 15px;">Tổng: @Model.PageCount</span>
+                                <span id="pagination-demo" class="pagination-md" style="margin-right: 10px;"></span>
+                            </div>
                         </div>
                         <!-- /.card-body -->
                     </div>
-                    @*<div class="tab-pane fade" id="custom-content-above-profile" role="tabpanel" aria-labelledby="custom-content-above-profile-tab">
-                            <!-- /.card-header -->
-                            <div class="card-body table-responsive p-0">
-                                <table class="table table-hover text-nowrap">
-                                    <thead>
-                                        <tr>
-                                            <th>Mã</th>
-                                            <th>Ngày tạo</th>
-                                            <th>Khách hàng</th>
-                                            <th>Thanh toán</th>
-                                            <th>Giao hàng</th>
-                                            <th>COD</th>
-                                            <th>Tổng tiền</th>
-                                            <th>Kênh</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                        @foreach (var item in Model)
-                                        {
-                                            foreach (var list in item.Order)
-                                            {
-                                                <tr>
-                                                    <td>@list.OrderNumber</td>
-                                                    <td>@list.CreatedAt</td>
-                                                    <td>@list.BillingAddress.FirstName</td>
-                                                    <td>---</td>
-                                                    <td>Cho giao hang</td>
-                                                    <td>--</td>
-                                                    <td>@String.Format("{0:0,0 đ}", list.SubtotalPrice)</td>
-                                                    <td>@list.SourceName</td>
-                                                </tr>
-                                            }
-                                        }
-
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
-                        <div class="tab-pane fade" id="custom-content-above-messages" role="tabpanel" aria-labelledby="custom-content-above-messages-tab">
-                            No
-                        </div>
-                        <div class="tab-pane fade" id="custom-content-above-settings" role="tabpanel" aria-labelledby="custom-content-above-settings-tab">
-                            <!-- /.card-header -->
-                            <div class="card-body table-responsive p-0">
-                                <table class="table table-hover text-nowrap">
-                                    <thead>
-                                        <tr>
-                                            <th>Mã</th>
-                                            <th>Ngày tạo</th>
-                                            <th>Khách hàng</th>
-                                            <th>Thanh toán</th>
-                                            <th>Giao hàng</th>
-                                            <th>COD</th>
-                                            <th>Tổng tiền</th>
-                                            <th>Kênh</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var item in Model)
-                                        {
-                                            foreach (var list in item.Order)
-                                            {
-                                                if (list.FinancialStatus == "pending")
-                                                {
-                                                    <tr>
-                                                        <td>@list.OrderNumber</td>
-                                                        <td>@list.CreatedAt</td>
-                                                        <td>@list.BillingAddress.FirstName</td>
-                                                        <td>@list.FinancialStatus</td>
-                                                        @if (list.FulfillmentStatus == "notfulfilled")
-                                                        {
-                                                            <td>
-                                                                <div>
-                                                                    <span class="circle-status-notfulfilled mr-2"></span>
-                                                                    <span class="circle-status-text-notfulfilled">Chưa giao hàng</span>
-                                                                </div>
-                                                            </td>
-                                                        }
-                                                        <td>--</td>
-                                                        <td>@String.Format("{0:0,0 đ}", list.SubtotalPrice)</td>
-                                                        <td>@list.SourceName</td>
-                                                    </tr>
-                                                }
-                                            }
-                                        }
-
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.card-body -->
-                        </div>*@
+                    <div class="tab-pane fade" id="custom-content-above-profile" role="tabpanel" aria-labelledby="custom-content-above-profile-tab">
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>Mã</th>
+                            <th>Ngày tạo</th>
+                            <th>Khách hàng</th>
+                            <th>Thanh toán</th>
+                            <th>Giao hàng</th>
+                            <th>COD</th>
+                            <th>Tổng tiền</th>
+                            <th>Kênh</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyTable">
+                        @{
+                            Html.RenderPartial("_PartialOrderNew");
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <div class="tab-pane fade" id="custom-content-above-messages" role="tabpanel" aria-labelledby="custom-content-above-messages-tab">
+            
+                <table class="table table-hover text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>Mã</th>
+                            <th>Ngày tạo</th>
+                            <th>Khách hàng</th>
+                            <th>Thanh toán</th>
+                            <th>Giao hàng</th>
+                            <th>COD</th>
+                            <th>Tổng tiền</th>
+                            <th>Kênh</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyTable">
+                        @{
+                            Html.RenderPartial("_PartialOrderUnpaid");
+                        }
+                    </tbody>
+                </table>
+        </div>
+        <div class="tab-pane fade" id="custom-content-above-settings" role="tabpanel" aria-labelledby="custom-content-above-settings-tab">
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>Mã</th>
+                            <th>Ngày tạo</th>
+                            <th>Khách hàng</th>
+                            <th>Thanh toán</th>
+                            <th>Giao hàng</th>
+                            <th>COD</th>
+                            <th>Tổng tiền</th>
+                            <th>Kênh</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyTable">
+                        @{
+                            Html.RenderPartial("_PartialNotfulfilled");
+                        }
+                        
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+                    
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-
-
-<nav aria-label="Page navigation example">
-    <ul class="pagination" id="pagination">
-        @for (int i = 1; i <= Model.TotalPage; i++)
-        {
-            <li class="page-item"><a class="page-link" href="">@i</a></li>
-        }
-    </ul>
-</nav>
+<!-- vms script -->
+@*@Scripts.Render(System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/Scripts/vmsJs", true))*@
 <script>
-    $('.pagination li a').on('click', function (e) {
-    e.preventDefault();
-    var a = $(this).html();
-    //console.log(a);
-    $.ajax({
-        type: 'POST',
-        contentType: 'application/json',
-        cache: false,
-        url: '@Url.Action("Order", "Soonnoc")',
-        data: JSON.stringify({ 'page': $(this).html() }),
-        success: function (data) {
-            console.log(data);
-            $("#tbodyTable").html(data);
-        },
-        error: function (xhr) {
-        },
-        complete: function (xhr) {
+    $('#pagination-demo').twbsPagination({
+        totalPages: @Model.TotalPage,
+        visiblePages: 7,
+        first: "Đầu",
+        next: "Tiếp",
+        last: "Cuối",
+        prev: "Trước",
+        onPageClick: function (e, page) {
+                $.ajax({
+                type: 'POST',
+                contentType: 'application/json',
+                cache: false,
+                url: '@Url.Action("Order", "Soonnoc")',
+                data: JSON.stringify({ 'page': page }),
+                success: function (data) {
+
+                    $("#tbodyTable").html(data);
+                },
+                error: function (xhr) {
+                },
+                complete: function (xhr) {
+                }
+            });
         }
     });
-});
 </script>
+@*<nav aria-label="Page navigation example">
+         <ul class="pagination" id="pagination">
+              @for (int i = 1; i <= Model.TotalPage; i++)
+               {
+                   <li class="page-item"><a class="page-link" href="">@i</a></li>
+               }
+         </ul>
+    </nav>
+        <script>
+                $('.pagination li a').on('click', function (e) {
+                e.preventDefault();
+                var a = $(this).html();
+                //console.log(a);
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json',
+                    cache: false,
+                    url: '@Url.Action("Order", "Soonnoc")',
+                    data: JSON.stringify({ 'page': $(this).html() }),
+                    success: function (data) {
+                        console.log(data);
+                        $("#tbodyTable").html(data);
+                    },
+                    error: function (xhr) {
+                    },
+                    complete: function (xhr) {
+                    }
+                });
+            });
+        </script>*@
 
